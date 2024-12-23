@@ -18,6 +18,12 @@ namespace LazurdIT.FluentOrm.MySql
             return new MySqlIsEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
         }
 
+        public static MySqlIsNotEqualCondition<T, TProperty> NotEq<T, TProperty>(Expression<Func<T, TProperty>> property, TProperty value) where T : IFluentModel
+        {
+            string propertyOrField = AttributeResolver.ResolveFieldName(property);
+            return new MySqlIsNotEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
+        }
+
         public static MySqlIsNullCondition IsNotNull<T, TProperty>(Expression<Func<T, TProperty>> property) where T : IFluentModel
         {
             string propertyOrField = AttributeResolver.ResolveFieldName(property);

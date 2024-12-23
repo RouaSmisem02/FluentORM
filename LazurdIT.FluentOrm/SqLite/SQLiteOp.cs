@@ -18,6 +18,12 @@ namespace LazurdIT.FluentOrm.SQLite
             return new SQLiteIsEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
         }
 
+        public static SQLiteIsNotEqualCondition<T, TProperty> NotEq<T, TProperty>(Expression<Func<T, TProperty>> property, TProperty value) where T : IFluentModel
+        {
+            string propertyOrField = AttributeResolver.ResolveFieldName(property);
+            return new SQLiteIsNotEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
+        }
+
         public static SQLiteIsNullCondition IsNotNull<T, TProperty>(Expression<Func<T, TProperty>> property) where T : IFluentModel
         {
             string propertyOrField = AttributeResolver.ResolveFieldName(property);

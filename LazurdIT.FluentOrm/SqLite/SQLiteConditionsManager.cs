@@ -25,6 +25,12 @@ namespace LazurdIT.FluentOrm.SQLite
             return this;
         }
 
+        public virtual SQLiteConditionsManager<T> NotEq<TProperty>(Expression<Func<T, TProperty>> property, TProperty value)
+        {
+            WhereConditions.Add(SQLiteOp.NotEq(property, value));
+            return this;
+        }
+
         public virtual SQLiteConditionsManager<T> Custom(IFluentSingleAttributeCondition condition)
         {
             WhereConditions.Add(condition);
@@ -148,6 +154,8 @@ namespace LazurdIT.FluentOrm.SQLite
         IFluentConditionsManager<T> IFluentConditionsManager<T>.Or(Action<IFluentConditionsManager<T>> conditionGroup) => Or(conditionGroup);
 
         IFluentConditionsManager<T> IFluentConditionsManager<T>.Eq<TProperty>(Expression<Func<T, TProperty>> property, TProperty value) => Eq(property, value);
+
+        IFluentConditionsManager<T> IFluentConditionsManager<T>.NotEq<TProperty>(Expression<Func<T, TProperty>> property, TProperty value) => NotEq(property, value);
 
         IFluentConditionsManager<T> IFluentConditionsManager<T>.Gt<TProperty>(Expression<Func<T, TProperty>> property, TProperty value) => Gt(property, value);
 

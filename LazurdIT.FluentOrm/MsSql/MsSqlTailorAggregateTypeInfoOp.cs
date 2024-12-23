@@ -23,6 +23,11 @@ namespace LazurdIT.FluentOrm.MsSql
             return new MsSqlIsEqualCondition<T, TProperty>() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = value };
         }
 
+        public MsSqlIsNotEqualCondition<T, TProperty> NotEq<T, TProperty>(Expression<Func<T, TProperty>> _, TProperty value) where T : IFluentModel
+        {
+            return new MsSqlIsNotEqualCondition<T, TProperty>() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = value };
+        }
+
         public MsSqlIsNullCondition IsNotNull<T, TProperty>(Expression<Func<T, TProperty>> _) where T : IFluentModel
         {
             return new MsSqlIsNullCondition() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = false };

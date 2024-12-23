@@ -23,6 +23,11 @@ namespace LazurdIT.FluentOrm.MySql
             return new MySqlIsEqualCondition<T, TProperty>() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = value };
         }
 
+        public MySqlIsNotEqualCondition<T, TProperty> NotEq<T, TProperty>(Expression<Func<T, TProperty>> _, TProperty value) where T : IFluentModel
+        {
+            return new MySqlIsNotEqualCondition<T, TProperty>() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = value };
+        }
+
         public MySqlIsNullCondition IsNotNull<T, TProperty>(Expression<Func<T, TProperty>> _) where T : IFluentModel
         {
             return new MySqlIsNullCondition() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = false };

@@ -12,7 +12,7 @@ internal static class SampleData
         new(){Name = "Jill Doe",Age = 19},
         new(){Name = "James Doe",Age = 17},
         new(){Name = "Jenny Doe",Age = 15},
-        new(){Name = "Jared Doe",Age = 13},
+        new(){Name = "Jared Doe",Age = null},
         new(){Name = "Jasmine Doe",Age = 11},
         new(){Name = "Jasper Doe",Age = 9},
         new(){Name = "Jade Doe",Age = 7},
@@ -20,6 +20,7 @@ internal static class SampleData
         new(){Name = "Jaxson Doe",Age = 3},
         new(){Name = "Jaxon Dark",Age = 1},
         new(){Name = "Jaxson Dark",Age = 0},
+        new(){Name = "Jaxon Adams2",Age = 0},
         new(){Name = "Jaxon Adams",Age = 0},
         new(){Name = "Jaxson Adams",Age = 0},
     };

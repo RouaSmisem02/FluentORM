@@ -26,13 +26,10 @@
 		<PackageReference Include="FluentMigrator.Runner.Postgres" Version="6.2.0" />
 		<PackageReference Include="FluentMigrator.Runner.SQLite" Version="6.2.0" />
 		<PackageReference Include="FluentMigrator.Runner.SqlServer" Version="6.2.0" />
+		<PackageReference Include="Lazurd.FluentORM" Version="1.3.6" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
 		<PackageReference Include="xunit" Version="2.4.2" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\LazurdIT.FluentOrm\LazurdIT.FluentOrm.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

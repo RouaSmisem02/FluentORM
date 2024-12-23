@@ -23,6 +23,11 @@ namespace LazurdIT.FluentOrm.SQLite
             return new SQLiteIsEqualCondition<T, TProperty>() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = value };
         }
 
+        public SQLiteIsNotEqualCondition<T, TProperty> NotEq<T, TProperty>(Expression<Func<T, TProperty>> _, TProperty value) where T : IFluentModel
+        {
+            return new SQLiteIsNotEqualCondition<T, TProperty>() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = value };
+        }
+
         public SQLiteIsNullCondition IsNotNull<T, TProperty>(Expression<Func<T, TProperty>> _) where T : IFluentModel
         {
             return new SQLiteIsNullCondition() { AttributeName = typeInfo.GetExpressionOnly(), ParameterName = $"agg_{typeInfo.FinalPropertyName}", Value = false };

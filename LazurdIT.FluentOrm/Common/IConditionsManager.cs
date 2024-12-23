@@ -20,6 +20,8 @@ namespace LazurdIT.FluentOrm.Common
 
         IFluentConditionsManager<T> Eq<TProperty>(Expression<Func<T, TProperty>> property, TProperty value);
 
+        IFluentConditionsManager<T> NotEq<TProperty>(Expression<Func<T, TProperty>> property, TProperty value);
+
         IFluentConditionsManager<T> Gt<TProperty>(Expression<Func<T, TProperty>> property, TProperty value);
 
         IFluentConditionsManager<T> Gte<TProperty>(Expression<Func<T, TProperty>> property, TProperty value);

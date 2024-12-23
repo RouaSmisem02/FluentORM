@@ -18,6 +18,12 @@ namespace LazurdIT.FluentOrm.Oracle
             return new OracleIsEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
         }
 
+        public static OracleIsNotEqualCondition<T, TProperty> NotEq<T, TProperty>(Expression<Func<T, TProperty>> property, TProperty value) where T : IFluentModel
+        {
+            string propertyOrField = AttributeResolver.ResolveFieldName(property);
+            return new OracleIsNotEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
+        }
+
         public static OracleIsNullCondition IsNotNull<T, TProperty>(Expression<Func<T, TProperty>> property) where T : IFluentModel
         {
             string propertyOrField = AttributeResolver.ResolveFieldName(property);

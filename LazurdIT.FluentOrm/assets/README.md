@@ -8,11 +8,17 @@ Please refer to the official documentation for a detailed explanation of the ava
 
 
 ## Release Notes 
+# 1.3.6
+Provide varios fixes and enhancements to the SDK, upgrade to this version is highly recommended.
+- Fix: Dependency Error in DotNet 6.0.
+- Feature: Support DotNet 9.0.
+- Feature: Added "NotEq" where condition.
+
 # 1.3.5
 Provide varios fixes and enhancements to the SDK, upgrade to this version is highly recommended.
 - Fix: Fixed an issue with DbParameters inPgSql.
 - Fix: Fixed varios bugs in Select Query.
-- Add: Added recusrive And/Or conditions (Conditions can now contain a single or group conditions on multiple levels).
+- Feature: Added recusrive And/Or conditions (Conditions can now contain a single or group conditions on multiple levels).
 - Enhancement: Added extra 21 test-cases to ensure more stability.
 - Enhancement: Reconstruct and enhance FluentCondition class.
 - Enhancement: Reconstruct and enhance ConditionsManager classes.
@@ -24,7 +30,7 @@ Provide varios fixes and enhancements to the SDK, upgrade to this version is hig
 - Fix: Fixed an issue with DB types conversion.
 - Fix: Fixed an issue pagination.
 - Fix: Fixed an issue with table name in Oracle DB.
-- Add: Added `WithConnection` method to the IFluentRepository allow the user to specify the connection.
+- Feature: Added `WithConnection` method to the IFluentRepository allow the user to specify the connection.
 - Enhancement: Added extra 54 test-cases to ensure more stability.
 
 # 1.2.0

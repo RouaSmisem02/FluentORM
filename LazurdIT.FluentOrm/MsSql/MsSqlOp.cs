@@ -18,6 +18,12 @@ namespace LazurdIT.FluentOrm.MsSql
             return new MsSqlIsEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
         }
 
+        public static MsSqlIsNotEqualCondition<T, TProperty> NotEq<T, TProperty>(Expression<Func<T, TProperty>> property, TProperty value) where T : IFluentModel
+        {
+            string propertyOrField = AttributeResolver.ResolveFieldName(property);
+            return new MsSqlIsNotEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
+        }
+
         public static MsSqlIsNullCondition IsNotNull<T, TProperty>(Expression<Func<T, TProperty>> property) where T : IFluentModel
         {
             string propertyOrField = AttributeResolver.ResolveFieldName(property);

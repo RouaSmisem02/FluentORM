@@ -25,6 +25,12 @@ namespace LazurdIT.FluentOrm.MsSql
             return this;
         }
 
+        public virtual MsSqlConditionsManager<T> NotEq<TProperty>(Expression<Func<T, TProperty>> property, TProperty value)
+        {
+            WhereConditions.Add(MsSqlOp.NotEq(property, value));
+            return this;
+        }
+
         public virtual MsSqlConditionsManager<T> Custom(IFluentSingleAttributeCondition condition)
         {
             WhereConditions.Add(condition);
@@ -148,6 +154,8 @@ namespace LazurdIT.FluentOrm.MsSql
         IFluentConditionsManager<T> IFluentConditionsManager<T>.Or(Action<IFluentConditionsManager<T>> conditionGroup) => Or(conditionGroup);
 
         IFluentConditionsManager<T> IFluentConditionsManager<T>.Eq<TProperty>(Expression<Func<T, TProperty>> property, TProperty value) => Eq(property, value);
+
+        IFluentConditionsManager<T> IFluentConditionsManager<T>.NotEq<TProperty>(Expression<Func<T, TProperty>> property, TProperty value) => NotEq(property, value);
 
         IFluentConditionsManager<T> IFluentConditionsManager<T>.Gt<TProperty>(Expression<Func<T, TProperty>> property, TProperty value) => Gt(property, value);
 

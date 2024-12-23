@@ -18,6 +18,12 @@ namespace LazurdIT.FluentOrm.Pgsql
             return new PgsqlIsEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
         }
 
+        public static PgsqlIsNotEqualCondition<T, TProperty> NotEq<T, TProperty>(Expression<Func<T, TProperty>> property, TProperty value) where T : IFluentModel
+        {
+            string propertyOrField = AttributeResolver.ResolveFieldName(property);
+            return new PgsqlIsNotEqualCondition<T, TProperty>() { AttributeName = propertyOrField, Value = value };
+        }
+
         public static PgsqlIsNullCondition IsNotNull<T, TProperty>(Expression<Func<T, TProperty>> property) where T : IFluentModel
         {
             string propertyOrField = AttributeResolver.ResolveFieldName(property);

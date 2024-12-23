@@ -48,6 +48,59 @@ public abstract class SelectTestsBase<TBase, TConnection, TRepository> where TBa
         connection.Close();
     }
 
+    [Fact(DisplayName = "Test select records with NotEq condition")]
+    public void TestSelectStudentsWithNotEqCondition()
+    {
+        var connectionString = TestBase.NewConnectionString();
+        var repository = TestBase.NewStudentsRepository();
+        TestBase.ToDoBefore(connectionString);
+
+        using var connection = TestBase.NewConnection(connectionString);
+        connection.Open();
+
+        FillStudentList(TestBase, connection);
+
+        var selectQuery = repository.Select()
+                .Where(wm => wm.NotEq(f => f.Id, 2));
+
+        //Adds a fix to pgsql test
+        connection.Close();
+        connection.Open();
+        var resultRecords = selectQuery.Execute(connection).ToList();
+
+        resultRecords.Should().HaveCount(SampleData.DefaultStudentsList.Count - 1, $"The record count should be {SampleData.DefaultStudentsList.Count - 1}, but got {resultRecords.Count}");
+
+        connection.Close();
+    }
+
+    [Fact(DisplayName = "Test select records with NotIn and nullables condition")]
+    public void TestSelectStudentsWithNotInAndNullCondition()
+    {
+        var connectionString = TestBase.NewConnectionString();
+        var repository = TestBase.NewStudentsRepository();
+        TestBase.ToDoBefore(connectionString);
+
+        using var connection = TestBase.NewConnection(connectionString);
+        connection.Open();
+
+        FillStudentList(TestBase, connection);
+        var countWithoudData = SampleData.DefaultStudentsList.Count(x => x.Age != 15 && x.Age != 17);
+        var selectQuery = repository.Select()
+                                    .Where(wm => wm.Or(o => o.NotIn(f => f.Age, 15, 17)
+                                                             .IsNull(f => f.Age)
+                                                      )
+                                    );
+
+        //Adds a fix to pgsql test
+        connection.Close();
+        connection.Open();
+        var resultRecords = selectQuery.Execute(connection).ToList();
+
+        resultRecords.Should().HaveCount(countWithoudData, $"The record count should be {countWithoudData}, but got {resultRecords.Count}");
+
+        connection.Close();
+    }
+
     [Fact(DisplayName = "Test select records page")]
     public void TestSelectStudentsPage()
     {
@@ -133,7 +186,7 @@ public abstract class SelectTestsBase<TBase, TConnection, TRepository> where TBa
         connection.Open();
 
         FillStudentList(TestBase, connection);
-        var countExpected = SampleData.DefaultStudentsList.Count(m => m.Name.Contains("Doe") && m.Name.Contains("J"));
+        var countExpected = SampleData.DefaultStudentsList.Count(m => m.Name.Contains("Doe") && m.Name.Contains('J'));
         var selectQuery = repository.Select().Where(m => m.And(mg => mg.Like(f => f.Name, "%Doe%")
                                                                     .Like(f => f.Name, "%J%"))
                                                     );
@@ -159,7 +212,7 @@ public abstract class SelectTestsBase<TBase, TConnection, TRepository> where TBa
         connection.Open();
 
         FillStudentList(TestBase, connection);
-        var countExpected = SampleData.DefaultStudentsList.Count(m => (m.Name.Contains("Doe") && m.Name.Contains("J")) || m.Name.Contains("Adams"));
+        var countExpected = SampleData.DefaultStudentsList.Count(m => (m.Name.Contains("Doe") && m.Name.Contains('J')) || m.Name.Contains("Adams"));
         var selectQuery = repository.Select()
                                     .Where(m => m.Or(a => a.And(mg => mg.Like(f => f.Name, "%Doe%").Like(f => f.Name, "%J%"))
                                                                     .Like(f => f.Name, "%Adams%")));
